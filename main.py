@@ -1,3 +1,4 @@
+import os
 import requests
 from os.path import join, dirname
 from dotenv import load_dotenv
@@ -5,13 +6,11 @@ from dotenv import load_dotenv
 dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
 
-import os
-
 token = os.environ.get('ACCESS_TOKEN')
 
 query = """
-{ 
-  search (query: "stars:>100", type: REPOSITORY, first: 100) { 
+{
+  search (query: "stars:>100", type: REPOSITORY, first: 100) {
     nodes {
       ... on Repository {
         nameWithOwner
@@ -36,7 +35,7 @@ query = """
 """
 
 url = 'https://api.github.com/graphql'
-json = { 'query' : query }
+json = {'query': query}
 headers = {'Authorization': 'Bearer %s' % token}
 
 r = requests.post(url=url, json=json, headers=headers)
