@@ -25,6 +25,9 @@ query = """
         issues {
           totalCount
         }
+        releases{
+          totalCount
+        }
         closedIssues: issues(states:CLOSED) {
           totalCount
         }
