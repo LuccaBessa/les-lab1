@@ -13,9 +13,8 @@ def main():
     print('Getting repositories data...')
     repos = getData()
 
-    print(restItems.__len__())
-
     generateCSV(repos, 'repos')
+    print('Done')
 
 
 if __name__ == "__main__":
