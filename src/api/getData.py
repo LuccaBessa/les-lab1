@@ -69,7 +69,8 @@ def getData():
                 'pullRequests': repoData['pullRequests']['totalCount'],
                 'issues': repoData['issues']['totalCount'],
                 'closedIssues': repoData['closedIssues']['totalCount'],
-                'releases': repoData['releases']['totalCount']
+                'closedIssuesRate': repoData['closedIssues']['totalCount'] / repoData['issues']['totalCount'] if repoData['issues']['totalCount'] != 0 else 0,
+                'releases': repoData['releases']['totalCount'],
             })
 
     return data

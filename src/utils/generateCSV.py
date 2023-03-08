@@ -11,6 +11,7 @@ headers = [
     'pullRequests',
     'issues',
     'closedIssues',
+    'closedIssuesRate',
     'releases'
 ]
 
@@ -33,5 +34,6 @@ def generateCSV(json, filename):
                 repo['pullRequests'],
                 repo['issues'],
                 repo['closedIssues'],
+                repo['closedIssuesRate'],
                 repo['releases']
             ])

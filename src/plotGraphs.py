@@ -40,12 +40,9 @@ plt.ylabel('Frequency')
 plt.savefig('../graphs/language_hist.png')
 plt.clf()
 
-# Calculate the rate between closed and total issues
-df['closed_rate'] = df['closedIssues'] / df['issues']
-
-# Create a boxplot of the 'closed_rate' column
-plt.boxplot(df['closed_rate'])
-plt.title('Boxplot of Closed Rate')
+# Create a boxplot of the 'closedIssuesRate' column
+plt.boxplot(df['closedIssuesRate'])
+plt.title('Boxplot of Closed Issue Rate')
 plt.ylabel('Closed Rate')
 plt.savefig('../graphs/closedrate_boxplot.png')
 plt.clf()
