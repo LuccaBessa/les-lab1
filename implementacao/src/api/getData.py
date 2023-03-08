@@ -1,6 +1,7 @@
 import os
 import requests
 from os.path import join, dirname
+from datetime import datetime
 
 
 def getData():
@@ -8,6 +9,7 @@ def getData():
     after = 'null'
     hasNextPage = True
     data = []
+    now = datetime.now()
 
     while hasNextPage:
         query = """
@@ -54,15 +56,21 @@ def getData():
         after = '"%s"' % response['data']['search']['pageInfo']['endCursor']
 
         for repoData in response['data']['search']['nodes']:
+            createdAt = datetime.strptime('%s' % repoData['createdAt'], '%Y-%m-%dT%H:%M:%SZ')
+            updatedAt = datetime.strptime('%s' % repoData['updatedAt'], '%Y-%m-%dT%H:%M:%SZ')
+
             data.append({
                 'nameWithOwner': repoData['nameWithOwner'],
                 'createdAt': repoData['createdAt'],
                 'updatedAt': repoData['updatedAt'],
+                'age': (now.year - createdAt.year) * 12 + (now.month - createdAt.month),
+                'timeSinceLastUpdate': (now - updatedAt).total_seconds() / 3600,
                 'primaryLanguage': repoData['primaryLanguage']['name'] if  repoData['primaryLanguage'] else 'None',
                 'pullRequests': repoData['pullRequests']['totalCount'],
                 'issues': repoData['issues']['totalCount'],
                 'closedIssues': repoData['closedIssues']['totalCount'],
-                'releases': repoData['releases']['totalCount']
+                'closedIssuesRate': repoData['closedIssues']['totalCount'] / repoData['issues']['totalCount'] if repoData['issues']['totalCount'] != 0 else 0,
+                'releases': repoData['releases']['totalCount'],
             })
 
     return data
