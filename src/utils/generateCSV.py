@@ -4,7 +4,9 @@ import os
 headers = [
     'nameWithOwner',
     'createdAt',
+    'age',
     'updatedAt',
+    'timeSinceLastUpdate',
     'primaryLanguage',
     'pullRequests',
     'issues',
@@ -24,7 +26,9 @@ def generateCSV(json, filename):
             writer.writerow([
                 repo['nameWithOwner'],
                 repo['createdAt'],
+                repo['age'],
                 repo['updatedAt'],
+                repo['timeSinceLastUpdate'],
                 repo['primaryLanguage'],
                 repo['pullRequests'],
                 repo['issues'],
